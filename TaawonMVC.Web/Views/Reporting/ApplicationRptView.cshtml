@@ -1,0 +1,117 @@
+﻿@using TaawonMVC.Web.Models.Common.Modals
+@model TaawonMVC.Web.Models.Reporting.ReportingViewModel
+@using ReportViewerForMvc;
+
+@{
+    ViewBag.Title = "ApplicationRptView";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Applications Report</h2>
+
+<form name="ApplicationRpt" role="form" validate class="form-validation">
+    <div class="row clearfix">
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Full Name</span>
+                    <input class="validate form-control" type="text" name="FullName" id="FullName" @*required*@ placeholder="Full Name">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Previous Restoration Source</span>
+                    <input class="validate form-control" type="text" name="previousRestorationSource" id="previousRestorationSource" @*required*@ placeholder="Previous Restoration Source">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Approved Date From</span>
+                    <input class="validate form-control" type="text" name="ApprovedDateFrom" id="ApprovedDateFrom" @*required*@ placeholder="Approved Date From">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Approved Date To</span>
+                    <input class="validate form-control" type="text" name="ApprovedDateTo" id="ApprovedDateTo" @*required*@ placeholder="Approved Date To">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Reject Date From</span>
+                    <input class="validate form-control" type="text" name="RejectDateFrom" id="RejectDateFrom" @*required*@ placeholder="Reject Date From">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Reject Date To</span>
+                    <input class="validate form-control" type="text" name="RejectDateTo" id="RejectDateTo" @*required*@ placeholder="Reject Date To">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row clearfix">
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Other Ownership Type</span>
+                    <input class="validate form-control" type="text" name="otherOwnershipType" id="otherOwnershipType" @*required*@ placeholder="Other Ownership Type">
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Interested Repairing Entity Name</span>
+                    <input class="validate form-control" type="text" name="InterestedRepairingEntityName" id="InterestedRepairingEntityName" @*required*@ placeholder="Interested Repairing Entity Name">
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Application Status</span>
+                    @Html.DropDownList("ApplicationStatus", new SelectList(Model.ApplicationStatus, "Value", "Text"),"Select Application Status" ,htmlAttributes: new { @class = "form-control", @name = "ApplicationStatus", @id = "ApplicationStatus", @*@required = "true"*@})
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="form-group form-float">
+                <div class="form-line">
+                    <span class="help-block text-muted small-font">Order By</span>
+                    @Html.DropDownList("OrderBy", new SelectList(Model.OrderBy, "Value", "Text"), htmlAttributes: new { @class = "form-control", @name = "OrderbyId", @id = "OrderbyId", @*@required = "true"*@})
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" onclick="location.href='@Url.Action("ReportsListView", "Reporting")'" class="btn btn-primary waves-effect">@L("Cancel")</button>
+        <button type="submit" formaction="@Url.Action("ApplicationRpt", "Reporting")" class="btn btn-primary waves-effect">Call Report</button>
+    </div>
+
+    @if (ViewBag.ReportViewer != null)
+    {
+        @Html.ReportViewer(ViewBag.ReportViewer as Microsoft.Reporting.WebForms.ReportViewer)
+    }
+</form>
+
+
+
+
